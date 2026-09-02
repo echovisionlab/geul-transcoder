@@ -1,0 +1,32 @@
+name: geul-waveform-processor
+
+services:
+  waveform-processor-prod:
+    image: ${GEUL_WAVEFORM_PROCESSOR_IMAGE:?set GEUL_WAVEFORM_PROCESSOR_IMAGE to a full image reference}
+    container_name: geul-waveform-processor-prod
+    environment:
+      PORT: 3030
+      LOG_LEVEL: ${GEUL_TRANSCODER_LOG_LEVEL:-info}
+      DATABASE_DSN: ${GEUL_TRANSCODER_DATABASE_DSN:?set GEUL_TRANSCODER_DATABASE_DSN}
+      S3_ENDPOINT: ${GEUL_TRANSCODER_S3_ENDPOINT:-http://minio:9000}
+      S3_MEDIA_BUCKET: ${GEUL_S3_MEDIA_BUCKET}
+      S3_REGION: ${GEUL_S3_REGION}
+      S3_ACCESS_KEY_ID: ${GEUL_TRANSCODER_S3_ACCESS_KEY_ID}
+      S3_SECRET_ACCESS_KEY: ${GEUL_TRANSCODER_S3_SECRET_ACCESS_KEY}
+      S3_FORCE_PATH_STYLE: ${GEUL_S3_FORCE_PATH_STYLE}
+      FFMPEG_PATH: /usr/bin/ffmpeg
+      FFPROBE_PATH: /usr/bin/ffprobe
+      FFMPEG_TEMP_DIR: /tmp/transcoder
+      WORKER_COUNT: ${GEUL_WAVEFORM_PROCESSOR_WORKER_COUNT:-2}
+      JOB_TIMEOUT_MINUTES: ${GEUL_WAVEFORM_PROCESSOR_JOB_TIMEOUT:-30}
+      AUDIO_HLS_BITRATE: ${GEUL_TRANSCODER_AUDIO_HLS_BITRATE:-128k}
+      WAVEFORM_WORKER_COUNT: ${GEUL_WAVEFORM_PROCESSOR_WORKER_COUNT:-2}
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${GEUL_OTEL_EXPORTER_OTLP_ENDPOINT:-http://otel-collector:4318}
+      OTEL_EXPORTER_OTLP_PROTOCOL: ${GEUL_OTEL_EXPORTER_OTLP_PROTOCOL:-http/protobuf}
+      OTEL_RESOURCE_ATTRIBUTES: ${GEUL_OTEL_RESOURCE_ATTRIBUTES:-service.namespace=geul,deployment.environment=production}
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD-SHELL', 'wget --spider -q http://127.0.0.1:3030/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3

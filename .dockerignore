@@ -1,0 +1,14 @@
+.git
+.github
+.DS_Store
+.env
+.env.*
+
+/bin/
+/dist/
+/.coverage/
+/coverage.out
+/transcoder
+/waveform-processor
+*.prof
+*.test
