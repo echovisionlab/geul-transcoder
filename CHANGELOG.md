@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/echovisionlab/geul-transcoder/compare/v0.1.1...v0.1.2) (2026-09-02)
+
+
+### Bug Fixes
+
+* pin Dockerfile frontend digest ([#5](https://github.com/echovisionlab/geul-transcoder/issues/5)) ([e06b228](https://github.com/echovisionlab/geul-transcoder/commit/e06b22815455abe0473de426261f876a84372264))
+
 ## [0.1.1](https://github.com/echovisionlab/geul-transcoder/compare/v0.1.0...v0.1.1) (2026-09-02)
 
 
