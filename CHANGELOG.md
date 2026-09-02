@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/echovisionlab/geul-transcoder/compare/v0.1.0...v0.1.1) (2026-09-02)
+
+
+### Bug Fixes
+
+* pin container base image digests ([#3](https://github.com/echovisionlab/geul-transcoder/issues/3)) ([3f2986f](https://github.com/echovisionlab/geul-transcoder/commit/3f2986f0eaabd0030518746b11ea77ab84aca6f5))
+
 ## 0.1.0 (2026-09-02)
 
 
