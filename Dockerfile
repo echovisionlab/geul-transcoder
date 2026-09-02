@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # Build stage - multi-arch support via TARGETARCH
-FROM --platform=$BUILDPLATFORM golang:1.26.6-alpine3.24 AS builder
+FROM --platform=$BUILDPLATFORM golang:1.26.6-alpine3.24@sha256:3889b425f035be855a72fb4755265311293b6d414521f0a519d819df32222d83 AS builder
 
 # Accept build args for cross-compilation
 ARG TARGETOS
@@ -28,7 +28,7 @@ RUN --mount=type=cache,target=/go/pkg/mod \
 
 # Production image with FFmpeg
 # Using Alpine for proper multi-arch support (arm64/amd64)
-FROM alpine:3.24
+FROM alpine:3.24@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
 
 # Install FFmpeg for media processing
 RUN apk add --no-cache \
